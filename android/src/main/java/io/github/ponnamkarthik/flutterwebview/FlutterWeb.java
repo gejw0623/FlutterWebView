@@ -90,9 +90,13 @@ public class FlutterWeb implements PlatformView, MethodCallHandler {
             if (url.startsWith("http") || url.startsWith("https") || url.startsWith("ftp")) {
                 return false;
             } else {
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(url));
-                registrar.activity().startActivity(intent);
+                try {
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse(url));
+                    registrar.activity().startActivity(intent);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 return true;
             }
         }
